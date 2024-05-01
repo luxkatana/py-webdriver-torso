@@ -1,14 +1,14 @@
 import random
 from PIL import Image, ImageDraw, ImageFont
 import math
-import random
 import wave
+from datetime import datetime
 import struct
 from pydub import AudioSegment
 import os
 import moviepy.video.io.ImageSequenceClip
-import glob
 import json
+today_str: str = "{} CET ".format(datetime.now().strftime("%Y/%m/%d"))
 
 class JSON:
     def read(file):
@@ -100,7 +100,7 @@ for xyz in range(AMOUNT):
         img1.rectangle(shapeR, fill="red", outline="red")
         img1.rectangle(shapeB, fill="blue", outline="blue")
         name = generate_string(10)
-        img1.text((1, h-20), "aqua.flv - Slide " + str(i).zfill(4), font=fnt, fill="black")
+        img1.text((1, h-20), today_str + str(i).zfill(4), font=fnt, fill="black")
         img.save("./IMG/" + str(i).zfill(4) + ".png")
 
     print("IMAGE GENERATION DONE")
@@ -125,7 +125,5 @@ for xyz in range(AMOUNT):
 
     image_files = [image_folder + '/' + img for img in os.listdir(image_folder) if img.endswith(".png")]
     clip = moviepy.video.io.ImageSequenceClip.ImageSequenceClip(image_files, fps=fps)
-    name = generate_string(6)
-    clip.write_videofile('./OUTPUT/tmp' + name + '.mp4', audio="./SOUND/output.mp3")
+    clip.write_videofile(f'./OUTPUT/{datetime.now().strftime("%Y:%m:%d")}.mp4', audio="./SOUND/output.mp3")
 
-    print("FINISHED - FILE NAME: tmp" + name + ".mp4")
