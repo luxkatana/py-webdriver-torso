@@ -1,1 +1,0 @@
-All the generated images will come here. This file will be deleted after the first use.

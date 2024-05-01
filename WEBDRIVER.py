@@ -36,11 +36,12 @@ sample_rate = config_data["SOUND_QUALITY"]
 
 fnt = ImageFont.truetype("./FONT/sys.ttf", 10)
 
-files = glob.glob('./IMG/*')
-for f in files:
-    os.remove(f)
+for f in os.listdir("./IMG/"):
+    os.remove(f'./IMG/{f}')
+for file in os.listdir("./OUTPUT/"):
+  os.remove(f'OUTPUT/{file}')
 
-print("REMOVED OLD FILES")
+
 
 
 def generate_string(length):
